@@ -1,8 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+interface FetchResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+}
 
-const useFetch = (url: string) => {
-  const [data, setData] = useState<any>(null);
+const useFetch =<T,>(url: string): FetchResult<T> => {
+
+  const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | any>(null);
 
@@ -19,6 +25,8 @@ const useFetch = (url: string) => {
     };
     fetchData();
   }, [url]);
+
+  return { data, loading, error };
 };
 
 export default useFetch;

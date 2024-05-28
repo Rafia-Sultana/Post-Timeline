@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 interface FetchResult<T> {
   data: T | null;
   loading: boolean;

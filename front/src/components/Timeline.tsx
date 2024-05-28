@@ -14,10 +14,8 @@ const Timeline: React.FC = () => {
 
   if (postsLoading || usersLoading) return <CircularProgress />;
   if (postsError || usersError) return <Typography>Error loading data</Typography>;
-
-
-  if(!users) return <Typography>Loading Users....</Typography>
-  if(!posts) return <Typography>Loading Posts....</Typography>
+  if (!users || !posts) return <Typography>Loading...</Typography>;
+  
   
   const userMap = users.reduce((acc: any, user: any) => {
     acc[user.id] = user;

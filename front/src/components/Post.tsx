@@ -6,10 +6,11 @@ import CommentList from './CommentList';
 import { API_URLS } from '../constants';
 import { PostI } from '../Interfaces/Post';
 import { UserI } from '../Interfaces/User';
+import { CommentListI } from '../Interfaces/CommentList';
 
 const Post: React.FC<{ post: PostI; user: UserI }> = ({ post, user }) => {
   const [showComments, setShowComments] = useState(false);
-  const { data: comments, loading, error } = useFetch(
+  const { data: comments, loading, error } = useFetch<CommentListI[]>(
     `${API_URLS.COMMENTS}?postId=${post.id}`
   );
 
@@ -31,7 +32,7 @@ const Post: React.FC<{ post: PostI; user: UserI }> = ({ post, user }) => {
             ) : error ? (
               <Typography>Error loading comments</Typography>
             ) : (
-              <CommentList comments={comments} />
+              <CommentList comments={comments || []} />
             )}
           </div>
         </Collapse>

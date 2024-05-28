@@ -7,7 +7,7 @@ import TypingEffect from './components/TypingEffect';
 const App: React.FC = () => (
   <Container>
     <CssBaseline />
-    <Typography variant="h3" sx={{fontFamily: "'Roboto', sans-serif" ,
+    <Typography variant="h3" sx={{fontFamily: "'Roboto', sans-serif" ,color:"white", 
     my:3}}>
 <TypingEffect text={"Timeline"}></TypingEffect>
     </Typography>

@@ -29,7 +29,7 @@ const Timeline: React.FC = () => {
       {posts
         .sort((a: any, b: any) => b.id - a.id)
               .map((post: any, index) => (
-                <div key={post.id} className={`stop ${index % 2 === 0 ? '' : 'even'}`}>
+                <div key={post.id} className={`stop ${index % 2 === 0 ? '' : 'even'} `}>
                 <Box className="box" >
                   <Post post={post} user={userMap[post.userId]} />
                 </Box>

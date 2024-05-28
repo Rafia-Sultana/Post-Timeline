@@ -1,14 +1,13 @@
 // src/components/Post.tsx
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardContent, Typography, Button, Collapse } from '@mui/material';
 import useFetch from '../hooks/useFetch';
 import CommentList from './CommentList';
 import { API_URLS } from '../constants';
 import { PostI } from '../Interfaces/Post';
 import { UserI } from '../Interfaces/User';
 
-
-const Post: React.FC<{ post:PostI, user:UserI}> = ({ post, user }) => {
+const Post: React.FC<{ post: PostI; user: UserI }> = ({ post, user }) => {
   const [showComments, setShowComments] = useState(false);
   const { data: comments, loading, error } = useFetch(
     `${API_URLS.COMMENTS}?postId=${post.id}`
@@ -25,7 +24,7 @@ const Post: React.FC<{ post:PostI, user:UserI}> = ({ post, user }) => {
         <Button onClick={() => setShowComments(!showComments)}>
           {showComments ? 'Hide Comments' : 'Show Comments'}
         </Button>
-        {showComments && (
+        <Collapse in={showComments}>
           <div>
             {loading ? (
               <Typography>Loading comments...</Typography>
@@ -35,7 +34,7 @@ const Post: React.FC<{ post:PostI, user:UserI}> = ({ post, user }) => {
               <CommentList comments={comments} />
             )}
           </div>
-        )}
+        </Collapse>
       </CardContent>
     </Card>
   );

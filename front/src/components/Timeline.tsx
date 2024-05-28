@@ -15,33 +15,25 @@ const Timeline: React.FC = () => {
   if (postsLoading || usersLoading) return <CircularProgress />;
   if (postsError || usersError) return <Typography>Error loading data</Typography>;
 
+
+  if(!users) return <Typography>Loading Users....</Typography>
+  if(!posts) return <Typography>Loading Posts....</Typography>
+  
   const userMap = users.reduce((acc: any, user: any) => {
     acc[user.id] = user;
     return acc;
   }, {});
 
   return (
-    <Container >
+    <Container className='timeline-container'>
       {posts
         .sort((a: any, b: any) => b.id - a.id)
               .map((post: any, index) => (
-                  <>
-                          <Box className="box" style={{
-                 
-                    marginLeft: index % 2 !== 0 ? '50%' : '0',
-                          marginRight: index % 2 === 0 ? '50%' : '0',
-                     
-                
-                    
-                  }}
-                 >
-                      <Post key={post.id} post={post} user={userMap[post.userId]} />
-                  
-                  </Box>
-                      <div className="ring" ></div>
-                  </>
-       
-       
+                <div key={post.id} className={`stop ${index % 2 === 0 ? '' : 'even'}`}>
+                <Box className="box" >
+                  <Post post={post} user={userMap[post.userId]} />
+                </Box>
+       </div>  
         ))}
     </Container>
   );

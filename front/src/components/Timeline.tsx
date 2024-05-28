@@ -1,11 +1,11 @@
-
 import React from 'react';
 import useFetch from '../hooks/useFetch';
 import Post from './Post';
-import { CircularProgress, Container, Typography } from '@mui/material';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import { API_URLS } from '../constants';
 import { PostI } from '../Interfaces/Post';
 import { UserI } from '../Interfaces/User';
+import '../assets/Styles/Timeline.css'
 
 const Timeline: React.FC = () => {
     const { data: posts, loading: postsLoading, error: postsError } = useFetch<PostI[]>(API_URLS.POSTS);
@@ -21,11 +21,27 @@ const Timeline: React.FC = () => {
   }, {});
 
   return (
-    <Container>
+    <Container >
       {posts
         .sort((a: any, b: any) => b.id - a.id)
-        .map((post: any) => (
-          <Post key={post.id} post={post} user={userMap[post.userId]} />
+              .map((post: any, index) => (
+                  <>
+                          <Box className="box" style={{
+                 
+                    marginLeft: index % 2 !== 0 ? '50%' : '0',
+                          marginRight: index % 2 === 0 ? '50%' : '0',
+                     
+                
+                    
+                  }}
+                 >
+                      <Post key={post.id} post={post} user={userMap[post.userId]} />
+                  
+                  </Box>
+                      <div className="ring" ></div>
+                  </>
+       
+       
         ))}
     </Container>
   );

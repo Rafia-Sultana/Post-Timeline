@@ -64,20 +64,18 @@
 }
 
 .stop.even {
-  /* justify-content: flex-end; */
   text-align: end;
   margin-left: calc(var(--timeline-width) / 2);
 }
 
 .stop.even::before {
-  /* right: auto; */
-  left: 0;
+   left: 0;
   translate: -50% 0;
 
 }
 
 .stop.even::after {
-  /* right: auto; */
+
   left: 20px;
   border-width: 3px 3px 0 0;
   clip-path: inset(0 var(--clip-horizontal) var(--clip-vertical) 0);
